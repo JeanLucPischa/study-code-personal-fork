@@ -1,8 +1,10 @@
 #include <stdio.h>
 
+#define board_size 8
+
 void printHorizontalBorder(){
   printf("  ");
-  for(int i=0; i<8; i++){
+  for(int i=0; i<board_size; i++){
     printf("+---");
   }
   printf("+\n");
@@ -18,7 +20,7 @@ void printSquares(int row){
 
   printf("%d ", row);
 
-  for(int i=0; i<8; i++){
+  for(int i=0; i<board_size; i++){
     counter = counter%2;          //wechseln von 0 und 1
     printf("|%s", color[counter]);
     counter++;
@@ -29,7 +31,7 @@ void printSquares(int row){
 
 void printColumnLetters(){
   printf("    ");
-  for(int i=0; i<8; i++){
+  for(int i=0; i<board_size; i++){
     printf("%c   ", i+65);
   }
   printf("\n");
@@ -41,7 +43,7 @@ void printChessboard(){
     if(k==1){
       break;
     }
-    for(int g=8; g>0; g--){
+    for(int g=board_size; g>0; g--){
       printHorizontalBorder();
       printSquares(g);
     }
