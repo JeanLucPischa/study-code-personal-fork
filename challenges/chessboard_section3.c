@@ -14,14 +14,14 @@ void printSquares(int row){
   int counter = 0;
   char *color[2] = {"###", "   "};
 
-  if(row%2){        //bei ungerader Zeilenzahl mit Schwarz (color[1]) beginnen
+  if(row%2){
     counter++;
   }
 
   printf("%d ", row);
 
   for(int i=0; i<board_size; i++){
-    counter = counter%2;          //wechseln von 0 und 1
+    counter = counter%2;
     printf("|%s", color[counter]);
     counter++;
   }
