@@ -43,9 +43,9 @@ void printChessboard(){
     if(k==1){
       break;
     }
-    for(int g=board_size; g>0; g--){
+    for(int row=board_size; row>0; row--){
       printHorizontalBorder();
-      printSquares(g);
+      printSquares(row);
     }
     printHorizontalBorder();
   }
