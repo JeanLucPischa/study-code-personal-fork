@@ -11,12 +11,8 @@ void printHorizontalBorder(){
 }
 
 void printSquares(int row){
-  int counter = 0;
+  int counter = row%2;
   char *color[2] = {"###", "   "};
-
-  if(row%2){
-    counter++;
-  }
 
   printf("%d ", row);
 
@@ -38,17 +34,15 @@ void printColumnLetters(){
 }
 
 void printChessboard(){
-  for(int k=0; k<2; k++){
-    printColumnLetters();
-    if(k==1){
-      break;
-    }
-    for(int row=board_size; row>0; row--){
-      printHorizontalBorder();
-      printSquares(row);
-    }
+  printColumnLetters();
+
+  for(int row=board_size; row>0; row--){
     printHorizontalBorder();
+    printSquares(row);
   }
+  printHorizontalBorder();
+  
+  printColumnLetters();
 }
 
 int main(){
