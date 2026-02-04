@@ -6,7 +6,7 @@ int main(){
 
   for(int j=row; j>0; j--){
     for(int i=0; i<8; i++){
-      printf("%c%d  ", i+65, row);
+      printf("%c%d  ", i+'A', row);
     }
     printf("\n\n"); 
     row--;
