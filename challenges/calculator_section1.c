@@ -13,6 +13,10 @@ float divide(float operand1, float operand2){
  return operand1/operand2;
 }
 
+void printResult(float operand1, float operand2, char operator, float (*calc)(float, float)){
+  printf("Das Ergebnis der Berechnung ist: %.2f %c %.2f = %.2f", operand1, operator, operand2, calc(operand1, operand2));
+}
+
 int main(){
 
   float firstNum;
@@ -36,10 +40,10 @@ int main(){
   printf("\n");
 
   switch(operator){
-    case '+': printf("Das Ergebnis der Berechnung ist: %.2f %c %.2f = %.2f", firstNum, operator, secondNum, add(firstNum, secondNum)); break;
-    case '-': printf("Das Ergebnis der Berechnung ist: %.2f %c %.2f = %.2f", firstNum, operator, secondNum, subtract(firstNum, secondNum)); break;
-    case '*': printf("Das Ergebnis der Berechnung ist: %.2f %c %.2f = %.2f", firstNum, operator, secondNum, multiply(firstNum, secondNum)); break;
-    case '/': secondNum==0 ? printf("Division durch Null ist nicht definiert.") : printf("Das Ergebnis der Berechnung ist: %.2f %c %.2f = %.2f", firstNum, operator, secondNum, divide(firstNum, secondNum));  break;
+    case '+': printResult(firstNum, secondNum, operator, add); break;
+    case '-': printResult(firstNum, secondNum, operator, subtract); break;
+    case '*': printResult(firstNum, secondNum, operator, multiply); break;
+    case '/': printResult(firstNum, secondNum, operator, divide);  break;
     default: break;
   }
 
