@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
 
   for(int i = 0; i<argc; i++){
-    printf("Argument %d at adress \"%p\" has content:\n%s (lenght: %zu)\n", i, &argv[i], argv[i], strlen(argv[i]));
+    printf("Argument %d at adress \"%p\" has content:\n%s (lenght: %zu (elements: %zu))\n", i, &argv[i], argv[i], strlen(argv[i]), (strlen(argv[i])-1));
   }
   
   return 0;
