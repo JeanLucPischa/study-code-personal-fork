@@ -7,7 +7,7 @@
 #define LAB5_MYSOLUTION_SEC3_H
 
 /*
-* @brief  fill given array with zeros except index 1, 3 and 5, fill them with 1
+* @brief  fill given array with zeros except index 1, 3 and 5, fill them with ones
 *
 * @param[in]  particle_arr  given array to store the numbers / particles in
 *             size          size of the given array
