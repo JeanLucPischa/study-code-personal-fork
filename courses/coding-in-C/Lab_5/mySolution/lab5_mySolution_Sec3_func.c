@@ -1,4 +1,9 @@
-//#include "lab5-mySolution-Sec3.h"
+/*
+* File: lab5_mySolution_Sec3_func.c
+* Description: Functions for program to simulate the behaviour of a particle
+*/
+
+#include <stdio.h>
 
 void setParticleArray(int *particle_arr, int size){
   for(int i=0; i<size; i++){
