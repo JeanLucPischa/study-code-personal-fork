@@ -1,20 +1,23 @@
 /*
 * File: lab5_mySolution_Sec3.c
-* Description: Program to simulate the behaviour of a particle
+* Description: Program to simulate the behaviour of particles
 */
 
-#include "lab5-mySolution-Sec3.h"
+#include <stdlib.h>
+#include <time.h>
+#include "lab5_mySolution_Sec3.h"
 
 #define ARRAY_SIZE 10
+#define TIME_STEPS 10
 
 int main(){
+  srand(time(NULL));
 
-  int my_particle_array[ARRAY_SIZE];
-  int counter = 0;
+  int my_particle_arr[ARRAY_SIZE];
 
-  setParticleArray(my_particle_array, ARRAY_SIZE);
+  int temp_arr[ARRAY_SIZE];
 
-  displayParticles(my_particle_array, ARRAY_SIZE, counter);
+  simulateRun(TIME_STEPS, my_particle_arr, temp_arr, ARRAY_SIZE);
 
   return 0;
 }
