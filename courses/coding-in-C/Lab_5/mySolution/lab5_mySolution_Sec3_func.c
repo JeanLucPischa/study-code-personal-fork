@@ -23,7 +23,7 @@ void setParticleArray(int *particle_arr, const int size, const int *init_pos, co
   for(int i=0; i<size; i++){
     particle_arr[i] = EMPTY_SPACE;
     
-    for(int j=0; i<size_init_pos_arr; j++){   //check if position in particle-array is supposed to have particle
+    for(int j=0; j<size_init_pos_arr; j++){   //check if position in particle-array is supposed to have particle
       if(init_pos[j]==i){
         particle_arr[i] = PARTICLE;
       }
@@ -83,7 +83,7 @@ void simulateParticles(int *particle_arr, int *temp_arr, const int size, int *pt
   for(int i=0; i<size; i++){  
     if(temp_arr[i]>PARTICLE){ //check if there is more than one particle on one spot
       temp_arr[i] = 0;
-      printf("Collision on index %d\n", i);
+      printf(COLLISION_MARKER "Collision on index %d\n" COLOR_RESET, i);
       *ptr_collision_index = i;
     }
   }
