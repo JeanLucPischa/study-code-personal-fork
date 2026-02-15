@@ -9,7 +9,7 @@
 #include "lab5_mySolution_Sec3.h"
 
 #define COLLISION_MARKER "\x1b[31m"       //red
-#define PARTICLE_MARKER "\x1b[34m"  //blue
+#define PARTICLE_MARKER "\x1b[34m"        //blue
 #define COLOR_RESET "\x1b[m"
 
 #define PARTICLE 1
