@@ -16,14 +16,14 @@
 #define EMPTY_SPACE 0
 
 void setParticleArray(int *particle_arr, int size, const int *init_pos, int size_init_pos_arr, int *collision_memory){
-  int counter = 0;
+  int init_index = 0;
 
   for(int i=0; i<size; i++){
     particle_arr[i] = EMPTY_SPACE;
 
-    if(counter<size_init_pos_arr && init_pos[counter]==i){  //check all content of init_pos[] and place ones accordingly
+    if(init_index<size_init_pos_arr && init_pos[init_index]==i){  //check all content of init_pos[] and place ones accordingly
       particle_arr[i] = PARTICLE;
-      counter++;
+      init_index++;
     }
   }
 
@@ -53,6 +53,7 @@ void displayParticles(int *particle_arr, int size, int counter, int *collision_m
 }
 
 void simulateParticles(int *particle_arr, int *temp_arr, int size, int *collision_memory){
+  //initialize temporary array
   for(int i=0; i<size; i++){
     temp_arr[i] = 0;
   }
