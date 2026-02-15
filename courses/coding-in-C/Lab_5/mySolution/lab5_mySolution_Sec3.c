@@ -8,16 +8,18 @@
 #include "lab5_mySolution_Sec3.h"
 
 #define ARRAY_SIZE 10
+#define INIT_ARRAY_SIZE 3   //amount of particles at start
 #define TIME_STEPS 10
 
 int main(){
   srand(time(NULL));
 
-  int my_particle_arr[ARRAY_SIZE];
+  int my_particle_arr[ARRAY_SIZE] = {0};
+  int temp_arr[ARRAY_SIZE] = {0};
 
-  int temp_arr[ARRAY_SIZE];
+  int initial_position[INIT_ARRAY_SIZE] = {1, 3, 5};
 
-  simulateRun(TIME_STEPS, my_particle_arr, temp_arr, ARRAY_SIZE);
+  simulateRun(TIME_STEPS, my_particle_arr, initial_position, temp_arr, ARRAY_SIZE, INIT_ARRAY_SIZE);
 
   return 0;
 }

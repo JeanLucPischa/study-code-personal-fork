@@ -8,63 +8,101 @@
 #include <time.h>
 #include "lab5_mySolution_Sec3.h"
 
-void setParticleArray(int *particle_arr, int *temp_arr, int size){
-  for(int i=0; i<size; i++){
-    particle_arr[i] = 0;
+#define COLLISION_MARKER "\x1b[31m"       //red
+#define PARTICLE_MARKER "\x1b[34m"  //blue
+#define COLOR_RESET "\x1b[m"
 
-    if((i==1)||(i==3)||(i==5)){ //set to 1 on index 1, 3 and 5
-      particle_arr[i] = 1;
+#define PARTICLE 1
+#define EMPTY_SPACE 0
+
+void setParticleArray(int *particle_arr, int size, const int *init_pos, int size_init_pos_arr, int *collision_memory){
+  int counter = 0;
+
+  for(int i=0; i<size; i++){
+    particle_arr[i] = EMPTY_SPACE;
+
+    if(counter<size_init_pos_arr && init_pos[counter]==i){  //check all content of init_pos[] and place ones accordingly
+      particle_arr[i] = PARTICLE;
+      counter++;
     }
   }
+
+  for(int i=0; i<((int)(size_init_pos_arr/2)); i++){        //initialize collision memory with value out of range
+    collision_memory[i] = size+1;
+}
 }
 
-void displayParticles(int *particle_arr, int size, int counter){
+void displayParticles(int *particle_arr, int size, int counter, int *collision_memory){
   printf("Time %d: ", counter);
 
   for(int i=0; i<size; i++){
-    printf("%d ", particle_arr[i]);
+    if(i == collision_memory[0]){                           //print index where collision happend in red color
+      printf(COLLISION_MARKER "%d " COLOR_RESET, particle_arr[i]);
+    }
+    else{
+      if(particle_arr[i]==PARTICLE){                        //print index with particles in blue color
+        printf(PARTICLE_MARKER "%d " COLOR_RESET, particle_arr[i]);
+      }
+      else{
+        printf("%d ", particle_arr[i]);
+      }
+    }
   }
 
   printf("\n");
 }
 
-void simulateParticles(int *particle_arr, int *temp_arr, int size){
+void simulateParticles(int *particle_arr, int *temp_arr, int size, int *collision_memory){
   for(int i=0; i<size; i++){
     temp_arr[i] = 0;
   }
 
-  for(int i=0; i<size; i++){  //check for particles
-    if(particle_arr[i]==1){   //particle detected
-      if((rand()%2)==1){    //move left
-        if(i!=0){
+  //check for particles
+  for(int i=0; i<size; i++){  
+    if(particle_arr[i]==PARTICLE){
+      if((rand()%2)){         //move left
+        if(i > 0){
           temp_arr[i-1] += 1;
+        }
+        else{                 //particle next to border; no movement to the left
+          temp_arr[i]++;
         }
       }
       else{                   //move right
-        if(i!=size-1){
+        if(i < size-1){
           temp_arr[i+1] += 1;
+        }
+        else{                 //particle next to border; no movement to the right
+          temp_arr[i]++;
         }
       }
     }
   }
 
-  for(int i=0; i<size; i++){  //check for collisions
-    if(temp_arr[i]>1){
+  //check for collisions
+  for(int i=0; i<size; i++){  
+    if(temp_arr[i]>PARTICLE){ //check if there is more than one particle on one spot
       temp_arr[i] = 0;
       printf("Collision on index %d\n", i);
+      collision_memory[0] = i;
     }
   }
 
-  for(int i=0; i<size; i++){  //copy temporary array to original
+  //copy temporary array to original
+  for(int i=0; i<size; i++){  
     particle_arr[i] = temp_arr[i];
   }
 }
 
-void simulateRun(int times, int *particle_arr, int *temp_arr, int size){
-  setParticleArray(particle_arr, temp_arr, size);
+void simulateRun(int times, int *particle_arr, const int *init_pos, int *temp_arr, int size, int size_init_pos_arr){
+  int max_collisions = (int)(size_init_pos_arr/2);  //max amount of collisions possible is particles / 2 (floored); e.g. 7 particles -> max 3 collisions possible
+  int collision_memory[max_collisions];    
+
+  setParticleArray(particle_arr, size, init_pos, size_init_pos_arr, collision_memory);
 
   for(int i=0; i<times; i++){
-    displayParticles(particle_arr, size, i);
-    simulateParticles(particle_arr, temp_arr, size);
+    displayParticles(particle_arr, size, i, collision_memory);
+    collision_memory[0] = size+1;                   //reset collision memory
+    simulateParticles(particle_arr, temp_arr, size, collision_memory);
   }
 }

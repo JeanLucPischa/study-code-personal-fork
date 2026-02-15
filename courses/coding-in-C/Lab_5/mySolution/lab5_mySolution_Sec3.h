@@ -11,8 +11,10 @@
 *
 * @param[in]  particle_arr  given array to store the numbers / particles in
 *             size          size of the given array
+*             init_pos      given array with initial positions of particles
+*             size_init_pos_arr   size of the array with the initial positions of the particles
 */
-void setParticleArray(int *particle_arr, int *temp_arr, int size);
+void setParticleArray(int *particle_arr, int size, const int *init_pos, int size_init_pos_arr, int *collision_memory);
 
 /*
 * @brief  display the current state of the particle-array
@@ -21,7 +23,7 @@ void setParticleArray(int *particle_arr, int *temp_arr, int size);
 *             size          size of the particle-array
 *             counter       current time-step
 */
-void displayParticles(int *particle_arr, int size, int counter);
+void displayParticles(int *particle_arr, int size, int counter, int *collision_memory);
 
 /*
 * @brief  simulate the movement of the particles
@@ -30,16 +32,18 @@ void displayParticles(int *particle_arr, int size, int counter);
 *             temp_arr      temporary array to store momentary positions of particles
 *             size          size of the particle-array
 */
-void simulateParticles(int *particle_arr, int *temp_arr, int size);
+void simulateParticles(int *particle_arr, int *temp_arr, int size, int *collision_memory);
 
 /*
 * @brief  simulate the movement of the particles for a given amount of steps
 *
 * @param[in]  times         times of steps simulated
 *             particle_arr  given array with the particles
+*             init_pos      given array with initial positions of particles
 *             temp_arr      temporary array to store momentary positions of particles
 *             size          size of the particle-array
+*             size_init_pos_arr   size of the array with the initial positions of the particles
 */
-void simulateRun(int times, int *particle_arr, int *temp_arr, int size);
+void simulateRun(int times, int *particle_arr, const int *init_pos, int *temp_arr, int size, int size_init_pos_arr);
 
 #endif
