@@ -1,6 +1,6 @@
 /*
- *  @title: Playlist Manager
- *  @description: demonstrate key differences between malloc and calloc. 
+ *  File: Lab7_Sec1.c
+ *  Description: demonstrate key differences between malloc and calloc. 
  *                ->  malloc: reserve defined amount of memory; declaration of defined object
  *                ->  calloc: reserve memory for declaration of array
  */
