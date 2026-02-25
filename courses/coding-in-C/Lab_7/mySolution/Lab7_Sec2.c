@@ -22,7 +22,7 @@ int main(){
   List *ptr_list1 = &list1;
   Node *temp_ptr = NULL;
 
-  for(int i=0; i<50; i++){
+  for(int i=50; i>0; i--){
     if(ptr_list1->head == NULL){
       
     }
