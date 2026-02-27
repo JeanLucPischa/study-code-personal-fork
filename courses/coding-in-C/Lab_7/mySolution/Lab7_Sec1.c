@@ -16,8 +16,8 @@ int main(){
   scanf("%d", &N);
   printf("------------------------------------\n");
 
-  int *ptr_memory = malloc(sizeof(N));
-  int *ptr_memory2 = calloc(N, sizeof(N));
+  int *ptr_memory = malloc(sizeof(*ptr_memory));
+  int *ptr_memory2 = calloc(N, sizeof(*ptr_memory2));
 
   if(ptr_memory == NULL){
     printf("memory allocation for ptr_memory failed");
