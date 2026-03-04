@@ -1,46 +1,122 @@
 /*
  *  File: Lab7_Sec2.c
- *  Description:  
+ *  Description:  Understand how linked lists are implemented in C
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-typedef struct node {
+//Element or Node of a linked list
+typedef struct Node {
+
   double value;
-  Node *ptr_next;
-} Node;
+  node *ptr_next_node;
 
-typedef struct list {
-  Node *head;
-} List;
+} node;
 
-Node *create_node(double value);
+node *create_node(double value);
+
+//##############################################################################################################################
 
 int main(){
+  srand(time(NULL));
 
-  List list1 = {NULL};
-  List *ptr_list1 = &list1;
-  Node *temp_ptr = NULL;
+  //head of list
+  node *head = NULL;
 
-  for(int i=50; i>0; i--){
-    if(ptr_list1->head == NULL){
-      
+  //pointer to current element
+  node *current = NULL;
+
+  //create 50 nodes with random values and append them to the list
+  for(int i=0; i<50; i++){
+    node *new_node = create_node(rand());
+
+    if(new_node == NULL){
+      printf("Error: Creation of new node failed\n");
+      return 1;
+    }
+
+    if(head == NULL){
+      head = new_node;
+      current = head;
     }
     else{
-      create_node(i)->ptr_next = temp_ptr;
+      current->ptr_next_node = new_node;
+      current = new_node;
     }
   }
+  
+  //create array with 51 elements
+  int arr[51];
+  for(int i=0; i<50; i++){
+    arr[i] = rand();
+  }
+  
+  //create additional random number
+  int random = rand();
 
+  //insert additional random number in array at index 3
+  arr[3] = random;
+
+  //create new node for insertion at position 3 of the list
+  node *new_node = create_node(random);
+  node *temp = head;
+
+  //insert the new node into the linked list as 3rd node
+  for(int i=0; i<2; i++){
+    temp = temp->ptr_next_node;
+  }
+
+  //whatthehelly
+  new_node->ptr_next_node = temp->ptr_next_node;
+  temp->ptr_next_node = new_node;
+
+  // Print array
+    printf("Array:\n");
+    for (int i = 0; i < 51; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    // Print linked list
+    printf("Linked List:\n");
+    Node *iter = head;
+    while (iter != NULL)
+    {
+        printf("%.0f ", iter->value);
+        iter = iter->next;
+    }
+    printf("\n");
+
+    // Free linked list memory
+    Node *tmp;
+    while (head != NULL)
+    {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
 
   return 0;
 }
 
-Node *create_node(double value){
+//##############################################################################################################################
 
-  Node this_node;
-  Node *ptr_this_node = &this_node;
-  ptr_this_node->value = value;
-  ptr_this_node->ptr_next = NULL;
+//Function to create new node
+node *create_node(double value){
 
-  return ptr_this_node;
+  //reserve memory for node
+  node *new_node = malloc(sizeof(*new_node));
+  if(new_node == NULL){
+    printf("Error: Memory allocation failed\n");
+    return NULL;
+  }
+
+  //fill node-parameters: value to given value and pointer to next node to NULL
+  new_node->value = value;
+  new_node->ptr_next_node = NULL;
+
+  return new_node;
 }
