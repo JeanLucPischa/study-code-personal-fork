@@ -82,20 +82,20 @@ int main(){
 
     // Print linked list
     printf("Linked List:\n");
-    Node *iter = head;
+    node *iter = head;
     while (iter != NULL)
     {
         printf("%.0f ", iter->value);
-        iter = iter->next;
+        iter = iter->ptr_next_node;
     }
     printf("\n");
 
     // Free linked list memory
-    Node *tmp;
+    node *tmp;
     while (head != NULL)
     {
         tmp = head;
-        head = head->next;
+        head = head->ptr_next_node;
         free(tmp);
     }
 
